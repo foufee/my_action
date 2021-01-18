@@ -1,0 +1,25 @@
+name: 'Sign code'
+description: 'Code signing'
+inputs:
+  file:  # id of input
+    description: 'What file to sign'
+    required: true
+    default: ''
+  key:  # id of input
+    description: 'Path to key to sign with'
+    required: true
+    default: ''
+outputs:
+  signed_file: 
+    description: "File name of signed file"
+    value: ${{ steps.signer.outputs.filename }}
+runs:
+  using: "composite"
+  steps: 
+    - id: signer
+      shell: bash
+      run: 
+        echo Will sign $file
+        echo with $key
+        echo "::set-output name=filename::filename.txt"
+      
